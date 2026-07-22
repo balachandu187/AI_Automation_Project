@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --color-flowmind-50: #eef2ff;
+  --color-flowmind-100: #e0e7ff;
+  --color-flowmind-200: #c7d2fe;
+  --color-flowmind-300: #a5b4fc;
+  --color-flowmind-400: #818cf8;
+  --color-flowmind-500: #6366f1;
+  --color-flowmind-600: #4f46e5;
+  --color-flowmind-700: #4338ca;
+  --color-flowmind-800: #3730a3;
+  --color-flowmind-900: #312e81;
+  --color-flowmind-950: #1e1b4b;
+
+  --color-surface-50: #f8fafc;
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
+  --color-surface-700: #334155;
+  --color-surface-800: #1e293b;
+  --color-surface-900: #0f172a;
+  --color-surface-950: #020617;
+}
+
+body {
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ReactFlow overrides for dark theme */
+.react-flow__background {
+  background-color: #0f172a !important;
+}
+
+.react-flow__node {
+  font-size: 14px;
+}

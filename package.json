@@ -1,0 +1,21 @@
+{
+  "name": "flowmind",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FlowMind — AI-first workflow automation platform",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "clean": "turbo clean",
+    "db:migrate": "turbo db:migrate",
+    "db:push": "turbo db:push",
+    "db:generate": "turbo db:generate"
+  },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@11.15.1"
+}

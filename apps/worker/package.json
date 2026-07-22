@@ -1,0 +1,27 @@
+{
+  "name": "@flowmind/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "bullmq": "^5.41.0",
+    "drizzle-orm": "^0.38.3",
+    "ioredis": "^5.4.0",
+    "postgres": "^3.4.5",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "eslint": "^9.16.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
