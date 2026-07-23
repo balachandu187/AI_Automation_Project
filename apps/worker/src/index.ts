@@ -6,6 +6,7 @@ import {
   aiExecutionQueue,
   connection,
 } from "./queues/index.js";
+import { createWorkflowExecutor } from "./workflow-runner.js";
 
 const config = loadConfig();
 
@@ -34,15 +35,17 @@ function createWorker(name: string, processor: (job: unknown) => Promise<void>) 
   return worker;
 }
 
-// Workflow execution worker
+// Workflow execution worker — runs workflow DAGs
 const workflowWorker = createWorker(
   workflowExecutionQueue.name,
   async (job: any) => {
-    console.log(`[workflow-execution] Processing job ${job.id}`);
-    // Workflow execution logic will be implemented in a future task.
-    // This processes the DAG, executes nodes, and manages retries.
-    await new Promise((resolve) => setTimeout(resolve, 100));
-  }
+    console.log(
+      `[workflow-execution] Processing job ${job.id} for execution ${job.data?.executionId}`,
+    );
+
+    const executor = await createWorkflowExecutor();
+    await executor.execute(job.data);
+  },
 );
 
 // Webhook processing worker
@@ -52,7 +55,7 @@ const webhookWorker = createWorker(
     console.log(`[webhook-processing] Processing job ${job.id}`);
     // Webhook validation and processing will be implemented in a future task.
     await new Promise((resolve) => setTimeout(resolve, 100));
-  }
+  },
 );
 
 // AI execution worker
@@ -62,7 +65,7 @@ const aiWorker = createWorker(
     console.log(`[ai-execution] Processing job ${job.id}`);
     // AI orchestration will be implemented in a future task.
     await new Promise((resolve) => setTimeout(resolve, 100));
-  }
+  },
 );
 
 console.log(`🚀 FlowMind Worker started (env: ${config.NODE_ENV})`);

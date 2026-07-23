@@ -20,3 +20,4 @@ export { integrationCredentials } from "./integration-credentials";
 export { aiConversations } from "./ai-conversations";
 export { aiMessages } from "./ai-messages";
 export { auditLogs } from "./audit-logs";
+export { deadLetterEvents } from "./dead-letter-events";
