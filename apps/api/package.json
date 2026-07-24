@@ -19,12 +19,15 @@
     "test:engine": "vitest run src/engine/"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.114.0",
     "@fastify/cors": "^11.0.0",
     "@fastify/rate-limit": "^10.2.0",
+    "@google/generative-ai": "^0.24.1",
     "drizzle-orm": "^0.38.3",
     "fastify": "^5.2.0",
     "fastify-plugin": "^5.0.0",
     "ioredis": "^5.4.0",
+    "openai": "^6.49.0",
     "postgres": "^3.4.5",
     "zod": "^3.24.0"
   },
