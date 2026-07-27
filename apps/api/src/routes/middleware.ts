@@ -161,35 +161,39 @@ export const wsWorkflowParams = z.object({
 });
 
 // ---------------------------------------------------------------------------
-// Auth stub middleware — extracts userId from X-User-Id header
-// In production, this will validate a JWT and set userId from its claims.
+// requireAuth middleware — validates JWT from Authorization header.
+// Extracts userId from the token payload and sets it on the request.
 // ---------------------------------------------------------------------------
 export async function requireAuth(
   request: FastifyRequest,
   reply: FastifyReply,
 ): Promise<void> {
-  const userId = request.headers["x-user-id"] as string | undefined;
+  const authHeader = request.headers.authorization;
 
-  if (!userId) {
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return reply.status(401).send({
       error: {
         code: ErrorCode.UNAUTHORIZED,
-        message: "Authentication required. Provide X-User-Id header.",
+        message: "Authentication required. Provide a Bearer token in the Authorization header.",
       },
     });
   }
 
-  // Basic UUID validation on the header value
-  if (!z.string().uuid().safeParse(userId).success) {
+  const token = authHeader.slice(7);
+
+  try {
+    // Dynamic import to avoid circular dependency with auth module
+    const { verify } = await import("../auth/jwt.js");
+    const payload = verify(token);
+    request.userId = payload.sub;
+  } catch {
     return reply.status(401).send({
       error: {
         code: ErrorCode.UNAUTHORIZED,
-        message: "Invalid user ID format.",
+        message: "Invalid or expired access token.",
       },
     });
   }
-
-  request.userId = userId;
 }
 
 // ---------------------------------------------------------------------------
