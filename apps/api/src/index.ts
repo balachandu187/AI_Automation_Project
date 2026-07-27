@@ -9,6 +9,7 @@ import { nodeRoutes } from "./routes/nodes.js";
 import { edgeRoutes } from "./routes/edges.js";
 import { executionRoutes } from "./routes/executions.js";
 import { integrationRoutes } from "./routes/integrations.js";
+import { authRoutes } from "./auth/routes.js";
 import {
   attachRequestId,
   errorHandler,
@@ -47,6 +48,7 @@ async function main(): Promise<void> {
   await app.register(edgeRoutes, { prefix: "/api/v1" });
   await app.register(executionRoutes, { prefix: "/api/v1" });
   await app.register(integrationRoutes, { prefix: "/api/v1" });
+  await app.register(authRoutes, { prefix: "/api/v1/auth" });
 
   // ---- Start server ----
   try {
